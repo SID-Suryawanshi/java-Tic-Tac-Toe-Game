@@ -60,53 +60,72 @@ public class MyGame {
         char playerX = 'X';
         char playerO = 'O';
 
-        createBoard(gameBoard);
+        int playerXWinCount = 0, playerOWinCount = 0;
 
-        char currentPlayer = playerX;
-
-        printBoard(gameBoard);
         while (true) {
+            createBoard(gameBoard);
+            System.out.print("Enter player (X/O) : ");
+            String playerChoice = sc.next();
+            char currentPlayer = (playerChoice.toUpperCase().charAt(0) == 'X') ? playerX : playerO;
 
-            System.out.println("currentPlayer : " + currentPlayer);
+            boolean gameEnded = false;
 
-            System.out.print("Enter row (0-2) : ");
-            int row = sc.nextInt();
-            System.out.print("Enter column (0-2) : ");
-            int col = sc.nextInt();
-            System.out.println();
-
-            if (row < 0 || row > gameBoard.length || col < 0 || col > gameBoard[0].length) {
-                System.out.println("Invalid coordinates!");
-                continue;
-            }
-
-            // Block player from overriding the playerPos:
-            boolean currPos = true;
-            if (gameBoard[row][col] == '.' && currPos) {
-                gameBoard[row][col] = currentPlayer;
-            } else {
-                currPos = false;
-            }
-
-            if (checkWinner(gameBoard, currentPlayer)) {
+            while (!gameEnded) {
                 printBoard(gameBoard);
-                System.out.println("Winner is " + currentPlayer);
-                break;
-            } else if (drawGame(gameBoard)) {
-                printBoard(gameBoard);
-                System.out.println("It's a Draw!");
-                break;
+
+                System.out.println("currentPlayer : " + currentPlayer);
+
+                System.out.print("Enter row (0-2) : ");
+                int row = sc.nextInt();
+                System.out.print("Enter column (0-2) : ");
+                int col = sc.nextInt();
+                System.out.println();
+
+                if (row < 0 || row > gameBoard.length || col < 0 || col > gameBoard[0].length) {
+                    System.out.println("Invalid coordinates!");
+                    continue;
+                }
+
+                // Block player from overriding the playerPos:
+                boolean currPos = true;
+                if (gameBoard[row][col] == '.' && currPos) {
+                    gameBoard[row][col] = currentPlayer;
+                } else {
+                    currPos = false;
+                }
+
+                if (checkWinner(gameBoard, currentPlayer)) {
+                    printBoard(gameBoard);
+                    System.out.println("Winner is " + currentPlayer);
+                    if (currentPlayer == playerX) {
+                        playerXWinCount++;
+                    } else {
+                        playerOWinCount++;
+                    }
+                    gameEnded = true;
+                } else if (drawGame(gameBoard)) {
+                    printBoard(gameBoard);
+                    System.out.println("It's a Draw!");
+                    gameEnded = true;
+                }
+                // player Switch:
+                else {
+                    currentPlayer = (currentPlayer == playerX) ? playerO : playerX;
+                }
+
             }
 
-            printBoard(gameBoard);
+            System.out.println("\n---SCORES---");
+            System.out.println("Player O : " + playerOWinCount);
+            System.out.println("Player X : " + playerXWinCount);
+            System.out.println("--------------");
 
-            // player Switch:
-            if (currentPlayer == playerX) {
-                currentPlayer = playerO;
-            } else {
-                currentPlayer = playerX;
+            System.out.print("\nPlay again? (yes/no) : ");
+            String playAgain = sc.next();
+
+            if (!playAgain.equalsIgnoreCase("yes")) {
+                break;
             }
-
         }
         System.out.println("Game Over. Thanks for playing!");
         sc.close();
