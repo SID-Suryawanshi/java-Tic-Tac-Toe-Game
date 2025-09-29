@@ -3,6 +3,7 @@ Tic-Tac-Toe: A Classic Command-Line Game in Java
 Welcome to the repository for a complete, two-player Tic-Tac-Toe game built with Java. This project is a simple yet robust implementation of the classic game, running entirely within the command line. It's a great example of core Java concepts, including 2D arrays, user input handling, and game loop management.
 
 ✨ Features
+
 This isn't just a basic game. It includes several features to create a complete user experience:
 
 Two-Player Mode: Play against a friend, taking turns as 'X' and 'O'.
@@ -18,6 +19,7 @@ Robust Input Validation: The game gracefully handles invalid inputs, such as cho
 Clean & Readable Board: The game board is printed in a clear, formatted way after every move.
 
 🚀 How to Run the Game
+
 To play the game, you will need to have a Java Development Kit (JDK) installed on your system.
 
 Clone the Repository:
@@ -65,6 +67,7 @@ Enter column (0-2): 0
 Player O's turn.
 
 🛠️ Built With
+
 Java: The core programming language used for all game logic.
 
 This project was created as a fun exercise in Java programming and demonstrates fundamental software development principles.
